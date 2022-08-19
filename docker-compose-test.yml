@@ -1,0 +1,52 @@
+version: "3"
+services:
+  networks:
+    drivenops_network:
+      driver: bridge
+
+  volumes:
+    database:
+      
+  db:
+    image: postgres:13
+    container_name: db
+    restart: always 
+    ports:
+      - 2345:5432
+    env_file:
+      - .env
+    networks:
+      - drivenops_network
+    volumes:
+      - database:/var/lib/postgresql/data
+
+  back_end:
+    container_name: drivenops-back
+    build: ./back-end
+    ports:
+      - 80:5000
+    depends_on:
+      - db
+    env_file:
+      - .env
+    networks:
+      - drivenops_network
+    volumes:
+      - .:/usr/src/drivenops-back
+
+  front_end:
+    container_name: drivenops-front
+    build: ./front-end
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - back_end
+    env_file:
+      - .env
+    networks:
+      - drivenops_network
+    volumes:
+      - .:/usr/src/drivenops-front
+      
+# docker-compose up/down => subir e descer os containers

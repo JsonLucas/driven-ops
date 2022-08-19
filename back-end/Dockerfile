@@ -8,7 +8,8 @@ RUN yarn
 
 COPY . .
 
-ENV PORT=5000
+ENV PORT=5000 
+ENV DATABASE_URL=postgresql://projects:admin@localhost:5432/students
 
 EXPOSE 5000
 

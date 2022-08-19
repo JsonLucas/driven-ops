@@ -1,11 +1,15 @@
 FROM node:16
 
-WORKDIR /usr/src/drivenops-front
-
-COPY package*.json yarn.lock ./
-
-RUN yarn
+WORKDIR /app
 
 COPY . .
+RUN yarn
+RUN yarn build
+RUN mkdir -p /var/www/html
+RUN mv build/* /var/www/html
 
-CMD ["yarn", "start"]
+WORKDIR /
+
+RUN rm -rf /app
+
+ENV REACT_APP_BASE_URL=http://localhost:5000

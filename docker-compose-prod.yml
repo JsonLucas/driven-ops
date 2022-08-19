@@ -1,0 +1,23 @@
+version: "3"
+services:
+  drivenops_front:
+    build: ./front-end
+    container_name: drivenops_front
+    volumes:
+      - build_react:/var/www/html
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - build_react:/var/www/html
+    depends_on:
+      - drivenops_front
+
+volumes:
+  build_react:
+
+# docker build -t meu_servidor_nginx . 
+# docker run -p "80:80" meu_servidor_nginx
