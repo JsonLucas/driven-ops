@@ -8,7 +8,6 @@ jobs:
         uses: actions/checkout@v3
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1
-				#precisamos criar um .env file por que o nosso está no gitignore
         with:
           envkey_POSTGRES_USER: "postgres"
           envkey_POSTGRES_PASSWORD: "admin"
@@ -16,6 +15,6 @@ jobs:
           envkey_DATABASE_URL: "postgres://projects:admin@db:5432/students"
           file_name: .env.test
       - name: Run tests
-        run: docker-compose -f docker-compose-test.yml run node_app yarn test
+        run: docker-compose -f docker-compose-test.yml run drivenops_back yarn test
       - name: Build
         run: yarn && yarn build

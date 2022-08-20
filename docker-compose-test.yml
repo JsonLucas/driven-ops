@@ -21,7 +21,7 @@ services:
       - database:/var/lib/postgresql/data
 
   back_end:
-    container_name: drivenops-back
+    container_name: drivenops_back
     build: ./back-end
     ports:
       - 80:5000
@@ -35,7 +35,7 @@ services:
       - .:/usr/src/drivenops-back
 
   front_end:
-    container_name: drivenops-front
+    container_name: drivenops_front
     build: ./front-end
     restart: always
     ports:
