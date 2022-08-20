@@ -14,7 +14,7 @@ services:
     ports:
       - 2345:5432
     env_file:
-      - .env
+      - .env.test
     networks:
       - drivenops_network
     volumes:
@@ -28,7 +28,7 @@ services:
     depends_on:
       - db
     env_file:
-      - .env
+      - .env.test
     networks:
       - drivenops_network
     volumes:
@@ -43,7 +43,7 @@ services:
     depends_on:
       - back_end
     env_file:
-      - .env
+      - .env.test
     networks:
       - drivenops_network
     volumes:
