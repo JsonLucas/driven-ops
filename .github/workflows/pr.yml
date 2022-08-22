@@ -9,12 +9,12 @@ jobs:
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1
         with:
-          envkey_POSTGRES_USER: "postgres"
-          envkey_POSTGRES_PASSWORD: "admin"
-          envkey_POSTGRES_DB: "students"
+          envkey_USER: "postgres"
+          envkey_PASSWORD: "admin"
+          envkey_DB: "students"
           envkey_DATABASE_URL: "postgres://projects:admin@db:5432/students"
           file_name: .env.test
       - name: Run tests
-        run: docker-compose -f ../../docker-compose-test.yml run drivenops_back yarn test
+        run: docker-compose -f docker-compose-test.yml run drivenops_back && yarn test
       - name: Build
         run: yarn && yarn build
